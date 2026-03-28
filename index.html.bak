@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>알쿠스캐너 | 쿠팡 상품을 알리익스프레스 최저가로</title>
+    <meta name="description" content="쿠팡 상품 링크를 붙여넣으면 알리익스프레스에서 동일 상품의 최저가를 즉시 찾아드립니다.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Pretendard', 'Inter', sans-serif; }
+        .gradient-hero { background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); }
+        .card-shadow { box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+        .badge-savings { background: linear-gradient(90deg, #22c55e, #16a34a); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Nav -->
+    <nav class="bg-white border-b border-slate-100 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="bg-blue-600 rounded-lg p-1.5">
+                    <i data-lucide="scan-search" class="text-white w-5 h-5"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight">알쿠<span class="text-blue-600">스캐너</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 font-medium text-slate-500 text-sm">
+                <a href="#how-it-works" class="hover:text-blue-600 transition">이용 방법</a>
+                <a href="#features" class="hover:text-blue-600 transition">주요 기능</a>
+                <a href="#about" class="hover:text-blue-600 transition">서비스 소개</a>
+            </div>
+            <a href="#demo" class="hidden md:block bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                무료로 시작하기
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="gradient-hero">
+        <div class="max-w-6xl mx-auto px-6 py-20 md:py-28 text-center">
+            <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+                <i data-lucide="zap" class="w-4 h-4"></i>
+                쿠팡 × 알리익스프레스 실시간 가격 비교
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
+                쿠팡 링크 하나로<br>
+                <span class="text-blue-600">알리 최저가를 즉시 탐색</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+                쿠팡 상품 URL을 붙여넣기만 하면, 알리익스프레스에서 동일하거나 유사한 상품의 최저가를 실시간으로 찾아드립니다. 평균 <strong class="text-green-600">60% 이상</strong> 절약하세요.
+            </p>
+
+            <!-- URL Input Mock -->
+            <div id="demo" class="max-w-2xl mx-auto">
+                <div class="bg-white rounded-2xl p-3 flex gap-3 card-shadow border border-slate-200">
+                    <div class="flex-1 flex items-center gap-3 bg-slate-50 rounded-xl px-4 py-3 text-slate-400 text-sm">
+                        <i data-lucide="link" class="w-4 h-4 flex-shrink-0"></i>
+                        <span>쿠팡 상품 URL을 여기에 붙여넣으세요 (예: coupang.com/vp/products/...)</span>
+                    </div>
+                    <button class="bg-blue-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-blue-700 transition whitespace-nowrap flex items-center gap-2">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                        비교하기
+                    </button>
+                </div>
+                <p class="text-xs text-slate-400 mt-3">서비스 출시 준비 중입니다 · 사전 등록 시 오픈 알림을 받으세요</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sample Result Card -->
+    <section class="max-w-6xl mx-auto px-6 py-16">
+        <p class="text-center text-sm font-semibold text-slate-400 uppercase tracking-widest mb-8">비교 결과 미리보기</p>
+        <div class="max-w-3xl mx-auto bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
+            <!-- Header -->
+            <div class="bg-slate-50 border-b border-slate-100 px-6 py-4 flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                <span class="text-sm text-slate-500">비교 완료</span>
+                <span class="ml-auto text-xs text-slate-400">유사도 94%</span>
+            </div>
+            <!-- Product -->
+            <div class="p-6">
+                <p class="text-sm font-medium text-slate-500 mb-4">무선 블루투스 이어폰 노이즈캔슬링 TWS</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <!-- Coupang -->
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold bg-orange-100 text-orange-600 px-2 py-0.5 rounded">쿠팡</span>
+                            <span class="text-xs text-slate-400">로켓배송</span>
+                        </div>
+                        <p class="text-2xl font-bold text-slate-800">39,900<span class="text-sm font-normal text-slate-500">원</span></p>
+                        <p class="text-xs text-slate-400 mt-1">내일 도착 예정</p>
+                    </div>
+                    <!-- AliExpress -->
+                    <div class="border-2 border-green-400 rounded-xl p-4 relative">
+                        <div class="absolute -top-3 left-4">
+                            <span class="badge-savings text-white text-xs font-bold px-3 py-1 rounded-full">69% 절약</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold bg-red-100 text-red-600 px-2 py-0.5 rounded">알리익스프레스</span>
+                            <span class="text-xs text-slate-400">무료배송</span>
+                        </div>
+                        <p class="text-2xl font-bold text-green-600">12,150<span class="text-sm font-normal text-slate-500">원</span></p>
+                        <p class="text-xs text-slate-400 mt-1">$9.00 · 배송 7~15일</p>
+                    </div>
+                </div>
+                <!-- Savings Summary -->
+                <div class="mt-4 bg-green-50 rounded-xl p-4 flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-green-800">예상 절약 금액</p>
+                        <p class="text-xs text-green-600 mt-0.5">알리익스프레스 구매 시</p>
+                    </div>
+                    <p class="text-3xl font-extrabold text-green-600">27,750원</p>
+                </div>
+                <div class="mt-4 flex gap-3">
+                    <button class="flex-1 border border-orange-300 text-orange-600 font-semibold py-3 rounded-xl text-sm hover:bg-orange-50 transition">쿠팡에서 구매</button>
+                    <button class="flex-1 bg-red-500 text-white font-semibold py-3 rounded-xl text-sm hover:bg-red-600 transition">알리에서 구매</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="bg-white border-y border-slate-100 py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-3">3단계로 끝나는 최저가 탐색</h2>
+                <p class="text-slate-500">복잡한 검색 없이, 링크 하나로 스마트한 쇼핑을 시작하세요.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 relative">
+<div class="text-center space-y-4">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl font-extrabold shadow-lg shadow-blue-200">1</div>
+                    <h3 class="text-lg font-bold">쿠팡 링크 붙여넣기</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">쿠팡에서 마음에 든 상품의 URL을 복사해 검색창에 붙여넣습니다.</p>
+                </div>
+                <div class="text-center space-y-4">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl font-extrabold shadow-lg shadow-blue-200">2</div>
+                    <h3 class="text-lg font-bold">알리익스프레스 자동 탐색</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">AI가 상품명·이미지·스펙을 분석하여 알리익스프레스에서 동일·유사 상품을 즉시 검색합니다.</p>
+                </div>
+                <div class="text-center space-y-4">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto text-2xl font-extrabold shadow-lg shadow-blue-200">3</div>
+                    <h3 class="text-lg font-bold">가격 비교 후 최적 선택</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">두 플랫폼의 가격·배송일·평점을 한눈에 비교하고, 원하는 곳에서 바로 구매하세요.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="max-w-6xl mx-auto px-6 py-20">
+        <div class="text-center mb-14">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-3">알쿠스캐너가 특별한 이유</h2>
+            <p class="text-slate-500">단순 가격 비교를 넘어, 스마트한 해외직구 경험을 제공합니다.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-3">
+                <div class="bg-blue-100 w-11 h-11 rounded-xl flex items-center justify-center text-blue-600">
+                    <i data-lucide="cpu" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-bold text-lg">AI 상품 매칭</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">상품명·이미지·카테고리를 복합 분석하여 알리익스프레스에서 가장 유사한 상품을 정확하게 찾아냅니다.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-3">
+                <div class="bg-green-100 w-11 h-11 rounded-xl flex items-center justify-center text-green-600">
+                    <i data-lucide="trending-down" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-bold text-lg">실시간 가격 조회</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">알리익스프레스 공식 Open Platform API를 통해 최신 가격 데이터를 실시간으로 조회합니다.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-3">
+                <div class="bg-purple-100 w-11 h-11 rounded-xl flex items-center justify-center text-purple-600">
+                    <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-bold text-lg">인기 비교 순위</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">다른 사용자들이 자주 비교한 인기 상품과 최고 절약 사례를 트렌딩 목록으로 제공합니다.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-3">
+                <div class="bg-yellow-100 w-11 h-11 rounded-xl flex items-center justify-center text-yellow-600">
+                    <i data-lucide="shield-check" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-bold text-lg">검증된 셀러 필터링</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">평점, 리뷰 수, 셀러 등급을 기준으로 신뢰도 높은 알리익스프레스 상품만 우선 노출합니다.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-3">
+                <div class="bg-pink-100 w-11 h-11 rounded-xl flex items-center justify-center text-pink-600">
+                    <i data-lucide="truck" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-bold text-lg">배송 정보 투명 공개</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">알리익스프레스 배송 예상 기간(7~20일)을 명확히 안내하여 합리적인 구매 결정을 돕습니다.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 card-shadow border border-slate-100 space-y-3">
+                <div class="bg-indigo-100 w-11 h-11 rounded-xl flex items-center justify-center text-indigo-600">
+                    <i data-lucide="smartphone" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-bold text-lg">모바일 최적화 UX</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">모바일에서도 쾌적하게 사용할 수 있도록 설계된 직관적인 인터페이스로 쇼핑 시간을 단축합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Mock -->
+    <section class="bg-white border-y border-slate-100 py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold">지금 인기 비교 상품</h2>
+                    <p class="text-slate-500 text-sm mt-1">많은 사용자가 탐색한 최고 절약 상품</p>
+                </div>
+                <span class="text-xs text-slate-400 bg-slate-100 px-3 py-1.5 rounded-full">실시간 업데이트</span>
+            </div>
+            <div class="space-y-3">
+                <!-- Item 1 -->
+                <div class="bg-slate-50 rounded-xl px-5 py-4 flex items-center gap-4 hover:bg-blue-50 transition cursor-pointer">
+                    <span class="text-2xl font-extrabold text-slate-200 w-8 text-center">1</span>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-sm truncate">보조배터리 20000mAh 고속충전 PD65W</p>
+                        <p class="text-xs text-slate-400 mt-0.5">쿠팡 42,900원 → 알리 11,200원</p>
+                    </div>
+                    <span class="badge-savings text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">74% 절약</span>
+                </div>
+                <!-- Item 2 -->
+                <div class="bg-slate-50 rounded-xl px-5 py-4 flex items-center gap-4 hover:bg-blue-50 transition cursor-pointer">
+                    <span class="text-2xl font-extrabold text-slate-200 w-8 text-center">2</span>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-sm truncate">RGB 기계식 키보드 87키 텐키리스</p>
+                        <p class="text-xs text-slate-400 mt-0.5">쿠팡 89,000원 → 알리 28,500원</p>
+                    </div>
+                    <span class="badge-savings text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">68% 절약</span>
+                </div>
+                <!-- Item 3 -->
+                <div class="bg-slate-50 rounded-xl px-5 py-4 flex items-center gap-4 hover:bg-blue-50 transition cursor-pointer">
+                    <span class="text-2xl font-extrabold text-slate-200 w-8 text-center">3</span>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-sm truncate">스마트워치 혈압 혈당 건강측정 방수</p>
+                        <p class="text-xs text-slate-400 mt-0.5">쿠팡 65,000원 → 알리 18,900원</p>
+                    </div>
+                    <span class="badge-savings text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">71% 절약</span>
+                </div>
+                <!-- Item 4 -->
+                <div class="bg-slate-50 rounded-xl px-5 py-4 flex items-center gap-4 hover:bg-blue-50 transition cursor-pointer">
+                    <span class="text-2xl font-extrabold text-slate-200 w-8 text-center">4</span>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-sm truncate">4K 웹캠 USB 자동초점 화상회의</p>
+                        <p class="text-xs text-slate-400 mt-0.5">쿠팡 78,000원 → 알리 22,100원</p>
+                    </div>
+                    <span class="badge-savings text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">72% 절약</span>
+                </div>
+                <!-- Item 5 -->
+                <div class="bg-slate-50 rounded-xl px-5 py-4 flex items-center gap-4 hover:bg-blue-50 transition cursor-pointer">
+                    <span class="text-2xl font-extrabold text-slate-200 w-8 text-center">5</span>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-sm truncate">휴대용 미니 선풍기 USB-C 충전식</p>
+                        <p class="text-xs text-slate-400 mt-0.5">쿠팡 19,900원 → 알리 4,800원</p>
+                    </div>
+                    <span class="badge-savings text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">76% 절약</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / CTA -->
+    <section id="about" class="max-w-6xl mx-auto px-6 py-20 text-center">
+        <div class="bg-blue-600 rounded-3xl p-10 md:p-16 text-white">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4">지금 사전 등록하고<br>오픈 혜택을 받으세요</h2>
+            <p class="text-blue-100 mb-8 max-w-xl mx-auto">서비스 출시 시 가장 먼저 알림을 받고, 초기 사용자 전용 혜택을 누리세요.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-3 max-w-md mx-auto">
+                <input type="email" placeholder="이메일 주소 입력" class="flex-1 rounded-xl px-4 py-3 text-slate-800 text-sm focus:outline-none">
+                <button class="bg-white text-blue-600 font-bold px-6 py-3 rounded-xl hover:bg-blue-50 transition whitespace-nowrap">
+                    사전 등록
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-white">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+            <!-- Affiliate Disclosure -->
+            <div class="bg-slate-50 rounded-xl p-5 mb-8 text-xs text-slate-500 leading-relaxed">
+                <p class="font-semibold text-slate-700 mb-2">파트너스 활동 공개 고지 (정보통신망법 준수)</p>
+                <p>알쿠스캐너는 쿠팡 파트너스 및 알리익스프레스 어필리에이트 프로그램에 참여하고 있습니다. 본 서비스의 상품 링크를 통해 구매가 이루어질 경우, 각 플랫폼으로부터 일정 수준의 수수료를 제공받을 수 있습니다. 이는 소비자의 구매 가격에 영향을 미치지 않으며, 중립적인 가격 비교 정보 제공을 최우선으로 합니다.</p>
+                <p class="mt-2 italic">"As a Coupang Associate and AliExpress Affiliate, Al-Ku Scanner may earn commissions from qualifying purchases. This does not affect the price you pay."</p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
+                <div class="flex items-center gap-2">
+                    <div class="bg-blue-600 rounded-md p-1">
+                        <i data-lucide="scan-search" class="text-white w-4 h-4"></i>
+                    </div>
+                    <span class="font-semibold text-slate-600">알쿠스캐너</span>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-slate-600 transition">이용약관</a>
+                    <a href="#" class="hover:text-slate-600 transition">개인정보처리방침</a>
+                    <a href="#" class="hover:text-slate-600 transition">문의하기</a>
+                </div>
+                <p>&copy; 2026 Al-Ku Scanner. Developed by shinnoah.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
