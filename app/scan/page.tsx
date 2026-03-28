@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { UrlInput } from '@/components/UrlInput'
 import { TrendingList } from '@/components/TrendingList'
 import { supabase } from '@/lib/supabase'
