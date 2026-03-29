@@ -26,7 +26,7 @@ async function fetchWithRetry(url: string, retries = 2): Promise<string | null> 
     : url
 
   const ua = USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)]
-  const headers = apiKey ? {} : {
+  const headers: Record<string, string> = apiKey ? {} : {
     'User-Agent': ua,
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8',
