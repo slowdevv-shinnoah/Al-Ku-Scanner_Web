@@ -20,8 +20,13 @@ export function normalizeCoupangUrl(url: string): string | null {
 }
 
 async function fetchWithRetry(url: string, retries = 2): Promise<string | null> {
+  const apiKey = process.env.SCRAPER_API_KEY
+  const fetchUrl = apiKey
+    ? `https://api.scraperapi.com/?api_key=${apiKey}&url=${encodeURIComponent(url)}&country_code=kr`
+    : url
+
   const ua = USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)]
-  const headers = {
+  const headers = apiKey ? {} : {
     'User-Agent': ua,
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8',
@@ -31,12 +36,10 @@ async function fetchWithRetry(url: string, retries = 2): Promise<string | null> 
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const res = await fetch(url, { headers, redirect: 'follow' })
-      console.log(`[coupang] attempt=${attempt} status=${res.status} url=${url}`)
+      const res = await fetch(fetchUrl, { headers, redirect: 'follow' })
       if (res.ok) return await res.text()
       if (attempt < retries) await new Promise(r => setTimeout(r, 1000 * 2 ** attempt))
-    } catch (e) {
-      console.log(`[coupang] attempt=${attempt} error=${e}`)
+    } catch {
       if (attempt < retries) await new Promise(r => setTimeout(r, 1000 * 2 ** attempt))
     }
   }
