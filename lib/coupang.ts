@@ -23,7 +23,7 @@ async function fetchWithRetry(url: string, retries = 2): Promise<string | null> 
   const apiKey = process.env.SCRAPER_API_KEY
 
   if (apiKey) {
-    const scraperUrl = `https://api.scraperapi.com/?api_key=${apiKey}&url=${encodeURIComponent(url)}&render=false`
+    const scraperUrl = `https://api.scraperapi.com/?api_key=${apiKey}&url=${encodeURIComponent(url)}&premium=true`
     try {
       const controller = new AbortController()
       const timer = setTimeout(() => controller.abort(), 30000)
