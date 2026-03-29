@@ -31,11 +31,12 @@ async function fetchWithRetry(url: string, retries = 2): Promise<string | null> 
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const res = await fetch(url, { headers })
+      const res = await fetch(url, { headers, redirect: 'follow' })
+      console.log(`[coupang] attempt=${attempt} status=${res.status} url=${url}`)
       if (res.ok) return await res.text()
-      // HTTP 오류(403 등) 시 지수 백오프 후 재시도
       if (attempt < retries) await new Promise(r => setTimeout(r, 1000 * 2 ** attempt))
-    } catch {
+    } catch (e) {
+      console.log(`[coupang] attempt=${attempt} error=${e}`)
       if (attempt < retries) await new Promise(r => setTimeout(r, 1000 * 2 ** attempt))
     }
   }
