@@ -21,12 +21,24 @@ export function normalizeCoupangUrl(url: string): string | null {
 
 async function fetchWithRetry(url: string, retries = 2): Promise<string | null> {
   const apiKey = process.env.SCRAPER_API_KEY
-  const fetchUrl = apiKey
-    ? `https://api.scraperapi.com/?api_key=${apiKey}&url=${encodeURIComponent(url)}&country_code=kr`
-    : url
+
+  if (apiKey) {
+    const scraperUrl = `https://api.scraperapi.com/?api_key=${apiKey}&url=${encodeURIComponent(url)}&render=false`
+    try {
+      const controller = new AbortController()
+      const timer = setTimeout(() => controller.abort(), 30000)
+      const res = await fetch(scraperUrl, { signal: controller.signal })
+      clearTimeout(timer)
+      console.log(`[coupang] scraperapi status=${res.status}`)
+      if (res.ok) return await res.text()
+    } catch (e) {
+      console.log(`[coupang] scraperapi error=${e}`)
+    }
+    return null
+  }
 
   const ua = USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)]
-  const headers: Record<string, string> = apiKey ? {} : {
+  const headers: Record<string, string> = {
     'User-Agent': ua,
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8',
@@ -34,11 +46,9 @@ async function fetchWithRetry(url: string, retries = 2): Promise<string | null> 
     'Cache-Control': 'no-cache',
   }
 
-  console.log(`[coupang] apiKey=${apiKey ? 'set' : 'unset'} fetchUrl=${fetchUrl.slice(0, 80)}`)
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const res = await fetch(fetchUrl, { headers, redirect: 'follow' })
-      console.log(`[coupang] attempt=${attempt} status=${res.status}`)
+      const res = await fetch(url, { headers, redirect: 'follow' })
       if (res.ok) return await res.text()
       if (attempt < retries) await new Promise(r => setTimeout(r, 1000 * 2 ** attempt))
     } catch {
