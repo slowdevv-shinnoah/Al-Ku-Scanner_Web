@@ -34,9 +34,11 @@ async function fetchWithRetry(url: string, retries = 2): Promise<string | null> 
     'Cache-Control': 'no-cache',
   }
 
+  console.log(`[coupang] apiKey=${apiKey ? 'set' : 'unset'} fetchUrl=${fetchUrl.slice(0, 80)}`)
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       const res = await fetch(fetchUrl, { headers, redirect: 'follow' })
+      console.log(`[coupang] attempt=${attempt} status=${res.status}`)
       if (res.ok) return await res.text()
       if (attempt < retries) await new Promise(r => setTimeout(r, 1000 * 2 ** attempt))
     } catch {
